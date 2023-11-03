@@ -1,8 +1,14 @@
+import NewProject from "./components/NewProject";
+import ProjectForm from "./components/ProjectForm";
+import ProjectSideBar from "./components/ProjectSideBar";
+
 function App() {
   return (
-    <>
-      <h1 className="text-6xl">Project Management App</h1>
-    </>
+    <main className="bg-neutral-200 h-screen w-screen flex justify-between">
+      <ProjectSideBar />
+      <NewProject />
+      {/* <ProjectForm /> */}
+    </main>
   );
 }
 
