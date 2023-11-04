@@ -37,9 +37,15 @@ export interface NoProjectSelectedProps {
 
 export interface ProjectsSideBarProps extends NoProjectSelectedProps {
   projects: projectDataProps[];
+  onSelectProject: (projectId: number | undefined) => void;
+  selectedProjectId: number | null | undefined;
 }
 
 export interface NewProjectProps {
   onAdd: (projectData: projectDataProps) => void;
   onCancel: () => void;
+}
+
+export interface SelectedProjectProps {
+  project: projectDataProps | undefined;
 }
