@@ -1,22 +1,27 @@
-import logo from "../assets";
-import Button from "./UI/Button";
+import Input from './Input';
 
-const NewProject = () => {
+const ProjectForm = () => {
   return (
-    <section className="flex flex-col m-auto text-center">
-      <img
-        src={logo}
-        width={120}
-        height={120}
-        className="mx-auto my-8"
-      />
-      <div className="flex flex-col gap-5 items-center">
-        <h2 className="font-bold text-3xl text-stone-800 mb-4">No Project Selected</h2>
-        <p className="text-slate-800 text-xl">Select a project or get started with a new one</p>
-        <Button label="Create New Project" onClick={() => { }} />
+    <div className="w-[35rem] mt-16">
+      <menu className="flex items-center justify-end gap-4 my-4">
+        <li>
+          <button className="text-stone-800 hover:text-stone-950">
+            Cancel
+          </button>
+        </li>
+        <li>
+          <button className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">
+            Save
+          </button>
+        </li>
+      </menu>
+      <div>
+        <Input label="Title" />
+        <Input label="Description" textarea />
+        <Input label="Due Date" />
       </div>
-    </section>
-  )
-}
+    </div>
+  );
+};
 
-export default NewProject;
+export default ProjectForm;
