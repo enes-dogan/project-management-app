@@ -1,8 +1,13 @@
 import { SelectedProjectProps } from '../types';
 import Tasks from './Tasks';
 
-const SelectedProject = ({ project, onDelete }: SelectedProjectProps) => {
-
+const SelectedProject = ({
+  project,
+  onDelete,
+  tasks,
+  onAddTask,
+  onDeleteTask,
+}: SelectedProjectProps) => {
   const formattedDate = new Date(project!.dueDate).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'short',
@@ -28,7 +33,11 @@ const SelectedProject = ({ project, onDelete }: SelectedProjectProps) => {
           {project!.description}
         </p>
       </header>
-      <Tasks />
+      <Tasks
+        tasks={tasks}
+        onAdd={onAddTask}
+        onDelete={onDeleteTask}
+      />
     </div>
   );
 };

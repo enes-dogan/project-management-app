@@ -19,6 +19,12 @@ export interface ModalHandle {
   close(): void;
 }
 
+export interface taskProp {
+  task: string;
+  projectId: number | undefined | null;
+  id: number;
+}
+
 export interface projectDataProps {
   title: string;
   description: string;
@@ -29,6 +35,7 @@ export interface projectDataProps {
 export interface projectsState {
   selectedProjectId: number | null | undefined;
   projects: projectDataProps[];
+  tasks: taskProp[];
 }
 
 export interface NoProjectSelectedProps {
@@ -49,4 +56,17 @@ export interface NewProjectProps {
 export interface SelectedProjectProps {
   project: projectDataProps | undefined;
   onDelete: () => void;
+  tasks: taskProp[];
+  onAddTask: (text: string) => void;
+  onDeleteTask: (id: number) => void;
+}
+
+export interface TasksProps {
+  tasks: taskProp[];
+  onAdd: (task: string) => void;
+  onDelete: (taskId: number) => void;
+}
+
+export interface NewTaskProps {
+  onAdd: (task: string) => void;
 }

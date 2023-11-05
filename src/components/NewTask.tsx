@@ -1,7 +1,17 @@
 import { useState } from 'react';
 
-const NewTask = () => {
+import { NewTaskProps } from '../types';
+
+const NewTask = ({ onAdd }: NewTaskProps) => {
   const [enteredTask, setEnteredTask] = useState('');
+
+  function handleClick() {
+    if (enteredTask.trim().length === 0) {
+      return;
+    }
+    onAdd(enteredTask);
+    setEnteredTask('');
+  }
 
   return (
     <div className="flex items-center gap-4">
@@ -13,7 +23,7 @@ const NewTask = () => {
           setEnteredTask(e.target.value);
         }}
       />
-      <button className="text-stone-700 hover:text-stone-950">Add Task</button>
+      <button onClick={handleClick} className="text-stone-700 hover:text-stone-950">Add Task</button>
     </div>
   );
 };

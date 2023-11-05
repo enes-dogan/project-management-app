@@ -8,11 +8,41 @@ import SelectedProject from './components/SelectedProject';
 import { projectsState } from './types';
 import { projectDataProps } from './types';
 
+
 function App() {
   const [projectsState, setProjectsState] = useState<projectsState>({
     selectedProjectId: undefined,
     projects: [],
+    tasks: [],
   });
+
+  function handleAddTask(text: string) {
+    setProjectsState(prevState => {
+      const taskId = Math.random();
+      const newTask = {
+        task: text,
+        projectId: prevState.selectedProjectId,
+        id: taskId,
+      };
+
+      return {
+        ...prevState,
+        tasks: [newTask, ...prevState.tasks],
+      };
+    });
+  }
+  // filtering the tasks array for only passing selected projects task not the whole array
+  const selectedProjectTasks = projectsState.tasks.filter(task => task.projectId === projectsState.selectedProjectId);
+
+  function handleDeleteTask(id: number) {
+    setProjectsState(prevState => ({
+      ...prevState,
+      tasks: prevState.tasks.filter(
+        task => task.id !== id
+      ),
+    }
+    ));
+  }
 
   function handleSelectProject(projectId: number | undefined) {
     setProjectsState(prevState => ({
@@ -65,7 +95,15 @@ function App() {
     project => project.id === projectsState.selectedProjectId
   );
 
-  let content = <SelectedProject project={selectedProject} onDelete={handleDeleteProject} />;
+  let content = (
+    <SelectedProject
+      project={selectedProject}
+      onDelete={handleDeleteProject}
+      tasks={selectedProjectTasks}
+      onAddTask={handleAddTask}
+      onDeleteTask={handleDeleteTask}
+    />
+  );
 
   if (projectsState.selectedProjectId === null) {
     content = (
@@ -73,8 +111,6 @@ function App() {
     );
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
-  } else {
-    //...
   }
 
   return (
