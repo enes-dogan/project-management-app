@@ -1,7 +1,7 @@
 import { SelectedProjectProps } from '../types';
+import Tasks from './Tasks';
 
-const SelectedProject = ({ project }: SelectedProjectProps) => {
-  console.log(project);
+const SelectedProject = ({ project, onDelete }: SelectedProjectProps) => {
 
   const formattedDate = new Date(project!.dueDate).toLocaleDateString('en-US', {
     day: 'numeric',
@@ -16,7 +16,10 @@ const SelectedProject = ({ project }: SelectedProjectProps) => {
           <h1 className="text-3xl font-bold text-stone-600 mb-2">
             {project!.title}
           </h1>
-          <button className="text-stone-600 hover:text-stone-950">
+          <button
+            onClick={onDelete}
+            className="text-stone-600 hover:text-stone-950"
+          >
             DELETE
           </button>
         </div>
@@ -25,7 +28,7 @@ const SelectedProject = ({ project }: SelectedProjectProps) => {
           {project!.description}
         </p>
       </header>
-      TASKS
+      <Tasks />
     </div>
   );
 };

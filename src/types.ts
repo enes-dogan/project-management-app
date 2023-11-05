@@ -48,4 +48,5 @@ export interface NewProjectProps {
 
 export interface SelectedProjectProps {
   project: projectDataProps | undefined;
+  onDelete: () => void;
 }
